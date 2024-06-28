@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Evento.Entities
 {
-    internal class Espectador : Participante
+    public class Espectador : Participante
     {
-        public string Empresa { get; set; }
-
-        public void AvaliarAtividade()
+        public Espectador(string nome) : base(nome)
         {
-            throw new NotSupportedException();
         }
 
+        public override void Listar()
+        {
+            Console.WriteLine($"Espectador: {Nome}");
+        }
     }
 }

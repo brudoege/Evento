@@ -1,28 +1,61 @@
 ﻿namespace Evento.Entities
 {
-    internal class Evento
+    public abstract class Evento
     {
+        public Evento(string nome, DateOnly data, string local, int maxParticipantes)
+        {
+            Nome = nome;
+            Data = data;
+            Local = local;
+            MaxParticipantes = maxParticipantes;
+            Participantes = new List<Participante>();
+            Atividades = new List<Atividade>();
+            Status = "Não iniciado";
+        }
+
         public string Nome { get; set; }
         public DateOnly Data { get; set; }
         public string Local { get; set; }
         public int MaxParticipantes { get; set; }
+        public List<Participante> Participantes { get; private set; }
+        public List<Atividade> Atividades { get; private set; }
+        public string Status { get; private set; }
 
-        public static void Iniciar()
+
+        public void Iniciar()
         {
-            throw new NotSupportedException();
+            Status = "Iniciado";
         }
-        public static void Pausar()
+        public void Pausar()
         {
-            throw new NotSupportedException();
+            Status = "Pausado";
         }
-        public static void Concluir()
+        public void Concluir()
         {
-            throw new NotSupportedException();
+            Status = "Concluído";
         }
-        public static void Cancelar()
+        public void Cancelar()
         {
-            throw new NotSupportedException();
+            Status = "Cancelado";
         }
 
+        public void AdicionarParticipante(Participante participante)
+        {
+            if (Participantes.Count < MaxParticipantes)
+            {
+                Participantes.Add(participante);
+            }
+            else
+            {
+                throw new Exception("Capacidade máxima atingida.");
+            }
+        }
+
+        public void AdicionarAtividade(Atividade atividade)
+        {
+            Atividades.Add(atividade);
+        }
+
+        public abstract void Listar();
     }
 }

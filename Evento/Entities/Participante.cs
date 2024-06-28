@@ -6,14 +6,33 @@ using System.Threading.Tasks;
 
 namespace Evento.Entities
 {
-    internal class Participante
+    public abstract class Participante
     {
-        public string Nome { get; set; }
-
-        public static void Inscrever()
+        public Participante(string nome)
         {
-            throw new NotSupportedException();
+            Nome = nome;
+            Agenda = new List<Atividade>();
         }
 
+        public string Nome { get; set; }
+        public List<Atividade> Agenda { get; private set; }
+
+
+        public void Inscrever(Atividade atividade)
+        {
+            Agenda.Add(atividade);
+        }
+
+        public abstract void Listar();
+
+        public void ListarAgenda()
+        {
+            Console.WriteLine("Agenda:");
+            foreach (var atividade in Agenda)
+            {
+                atividade.Listar();
+            }
+            Console.WriteLine("\n");
+        }
     }
 }

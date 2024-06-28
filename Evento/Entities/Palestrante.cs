@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Evento.Entities
 {
-    internal class Palestrante : Participante
+    public class Palestrante : Participante
     {
-        public string Curriculo { get; set; }
-
-        public void AgendarPalestra()
+        public Palestrante(string nome) : base(nome)
         {
-            throw new NotSupportedException();
+        }
+
+        public override void Listar()
+        {
+            Console.WriteLine($"Palestrante: {Nome}");
         }
     }
 }
